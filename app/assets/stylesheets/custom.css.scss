@@ -1,5 +1,9 @@
 @import "bootstrap";
 
+/*变量*/
+/* $lightGray: #999; 用sass自带的$grayLight代替 */
+$grayMediumLight: #eaeaea;
+
 /* 全局---开始 */
 
 html {
@@ -20,11 +24,17 @@ textarea {
 
 .center {
 	text-align: center;
+
+  h1 {
+      margin-bottom: 10px;
+  }
 }
 
+/* del
 .center h1 {
-	margin-bottom: 10px;
+      margin-bottom: 10px;
 }
+*/
 
 /* 全局---结束 */
 
@@ -45,7 +55,7 @@ h2 {
   margin-bottom: 30px;
   text-align: center;
   font-weight: normal;
-  color: #999;
+  color: $grayLight;
 }
 
 p {
@@ -66,21 +76,51 @@ p {
   font-weight: bold;
   line-height: 1;
   decoration: none;
+  &:hover {
+    color: #fff;
+    text-decoration: none;
+  }
+
 }
 
+/* del
 #logo:hover {
 	color: #fff;
 	text-decoration: none;
 }
+*/
 
 /* footer */
 
 footer {
   margin-top: 45px;
   padding-top: 5px;
-  border-top: 1px solid #eaeaea;
-  color: #999;
+  border-top: 1px solid $grayMediumLight;
+  color: $grayLight;
+  a {
+    color: #555;
+    &:hover {
+      color: #222;
+    }
+  }
+
+  small {
+    float: left;
+  }
+
+  ul{
+   float: right;
+   list-style: none;
+   li {
+     float: left;
+     margin-left: 10px;
+   }
+
+  } 
+
 }
+
+/* nested in a , del
 
 footer a {
   color: #555;
@@ -104,6 +144,7 @@ footer ul li {
   margin-left: 10px;
 }
 
+*/
 
 
 

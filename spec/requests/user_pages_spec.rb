@@ -19,4 +19,28 @@ describe "UserPages" do
 
   end
 
+  describe "注册流程" do
+    before { visit signup_path }
+    describe "填入错误的注册信息" do
+      it "不能正常的新增一个用户" do
+        expect { click_button "新建账户"}.not_to change(User, :count)
+      end
+    end
+    describe "填入正确的注册信息" do
+      before do 
+        fill_in "Name", with: "TestUser"
+        fill_in "Email", with: "abc@dxfdfd.com"
+        fill_in "Password", with: "abc"
+        fill_in "Confirmation", with: "abc"
+      end
+        it "应该能正确新增一个用户" do
+          expect do
+            click_button "新建账户"
+          end.to change(User, :count).by(1)
+
+        end
+
+
+    end
+  end
 end

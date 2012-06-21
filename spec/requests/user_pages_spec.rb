@@ -27,17 +27,17 @@ describe "UserPages" do
       end
     end
     describe "填入正确的注册信息" do
+      # 需要和label的字符串一致
       before do 
-        fill_in "Name", with: "TestUser"
-        fill_in "Email", with: "abc@dxfdfd.com"
-        fill_in "Password", with: "abc"
-        fill_in "Confirmation", with: "abc"
+        fill_in "用户名", with: "TestUseryy"
+        fill_in "Email", with: "abc@dxfdfuuud.com"
+        fill_in "密码", with: "abc123"
+        fill_in "确认密码", with: "abc123"
       end
         it "应该能正确新增一个用户" do
           expect do
             click_button "新建账户"
           end.to change(User, :count).by(1)
-
         end
 
 

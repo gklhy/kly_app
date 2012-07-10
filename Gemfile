@@ -1,8 +1,10 @@
 source 'https://rubygems.org'
+# 发现了taobao的rubygems镜像 http://ruby.taobao.org/ 网络问题的话可以用
 
 gem 'rails', '3.2.3'
 gem 'bcrypt-ruby', '3.0.1'
 gem 'bootstrap-sass', '2.0.0'
+gem 'rails-i18n', '0.1.8'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'

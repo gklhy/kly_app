@@ -39,8 +39,6 @@ describe "UserPages" do
             click_button "新建账户"
           end.to change(User, :count).by(1)
         end
-
-
     end
   end
 end

@@ -1,5 +1,9 @@
 KlyApp::Application.routes.draw do
- 
+
+  resources :users
+  
+  resources :sessions, only: [:new, :create, :destroy]
+
   root to: 'static_pages#home' 
 
   match '/about', to: 'static_pages#about'
@@ -8,7 +12,9 @@ KlyApp::Application.routes.draw do
   
   match '/signup', to: 'users#new'
   
-  resources :users
+  match '/signin', to: 'sessions#new'
+
+  match '/signout', to: 'sessions#destroy', via: :delete
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

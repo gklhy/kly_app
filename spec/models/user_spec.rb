@@ -18,22 +18,22 @@ describe User do
   it { should respond_to (:remember_token) }
   it { should be_valid }
   
-  describe 'when username is not present' do
+  describe '用户名没有显示' do
   	 before { @user.name = " " }
      it { should_not be_valid }
   end
 
-  describe 'when email is not present' do
+  describe 'email没有显示' do
      before { @user.name = " " }
      it { should be_invalid }
   end
 
-  describe 'when username is too long (> 50 )' do
+  describe '用户名超过50个字符' do
      before { @user.name = 'a' * 51 }
      it { should_not be_valid }
   end
 
-  describe 'when email is not valid' do
+  describe 'email格式不正确' do
      invalid_email_addresses = %w[addad@ddd,com dfs@ddfdf  sdfds@ @dafds.com fssdf@sdd. sdfd_at_sdfdsf]
      invalid_email_addresses.each do | invalid_email_address |
         before { @user.email = invalid_email_address }
@@ -41,7 +41,7 @@ describe User do
      end
   end
 
-  describe 'when email is valid' do
+  describe 'email格式正确' do
      valid_email_addresses = %w[addf.dfd@dfdf.com ds111@fddf.com.cn erer@ddd.info QQQ+rrr@ddd.uk]
      valid_email_addresses.each do | valid_email_address |
         before { @user.email = valid_email_address }
@@ -50,7 +50,7 @@ describe User do
   end
 
 
-  describe 'when email address is already taken' do
+  describe 'email地址已经被注册' do
      before do 
          user_with_same_email = @user.dup
          user_with_same_email.email = @user.email.upcase
@@ -59,7 +59,7 @@ describe User do
      it { should_not be_valid }
   end
 
-  describe 'when password is not present' do
+  describe '密码没有显示' do
      before do
      	@user.password = " "
      	@user.password_confirmation = " "
@@ -69,29 +69,33 @@ describe User do
     
   end
   
-  describe 'when password_confirmation is nil' do
+  describe '密码确认为空' do
      before { @user.password_confirmation = nil }
      it { should_not be_valid }
   end
 
-  describe "when password doesn't match the comfirmation" do
+  describe "两次输入的密码不相同" do
      before { @user.password_confirmation = 'mismatch' }
      it { should_not be_valid }
   end
 
-  describe 'return value of authenticate method' do
+  describe '登录验证返回时' do
      before { @user.save }
      let(:found_user) { User.find_by_email(@user.email) }
      
-     describe 'with valid password' do
+     describe '使用正确的密码' do
         it { should == found_user.authenticate(@user.password) }
      end
 
-     describe 'with invalid password' do
+     describe '使用不正确的密码' do
         let(:user_for_invalid_password) { found_user.authenticate('错误的密码') }
         it { should_not == user_for_invalid_password }
         specify { user_for_invalid_password.should be_false }
      end
+  end
 
+  describe '登录标记(remember token)' do
+     before { @user.save }
+     its(:remember_token) { should_not be_blank }
   end
 end

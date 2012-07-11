@@ -20,6 +20,11 @@ describe "验证" do
          it { should have_link('个人信息', href: user_path(:user)) }
          it { should have_link('退出', href: signout_path) }
          it { should_not have_link('登录', href: signin_path) }
+
+         describe "点击'退出'按钮之后" do
+            before { click_link '退出'}
+            it { should have_link('登录') }
+         end
       end
       describe "跳转到其他的页面" do
          before { click_link "主页"}

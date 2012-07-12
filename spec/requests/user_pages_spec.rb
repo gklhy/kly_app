@@ -1,7 +1,7 @@
 #encoding=utf-8
 require 'spec_helper'
 
-describe "UserPages" do
+describe "用户页面" do
  
    subject { page }
 
@@ -41,4 +41,19 @@ describe "UserPages" do
         end
     end
   end
+
+  describe "编辑" do
+     let(:user) { FactoryGirl.create(:user) }
+     before { visit edit_user_path(user) }
+     describe "页面" do
+        it { should have_selector('h1', text: '更新您的信息') }
+        it { should have_selector('title', text: '编辑用户信息') }
+        it { should have_link('修改', href: 'http://gravatar.com/emails') }
+     end
+     describe "输入不正确的信息" do
+        before { click_button "更新" }
+        it { should have_content('出错了！') }
+     end
+  end
+
 end
